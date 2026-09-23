@@ -86,7 +86,7 @@ SET(SPACECRAFT_ID 0x42)
 # and must be loaded explicitly via startup script or command.
 # This list is effectively appended to every TGTx_APPLIST in targets.cmake.
 # Example:
-list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
+list(APPEND MISSION_GLOBAL_APPLIST sample_app bft_app sample_lib)
 
 LIST(APPEND MISSION_GLOBAL_APPLIST cf)
 LIST(APPEND MISSION_GLOBAL_APPLIST hs)
@@ -118,13 +118,7 @@ endif()
 SET(FT_INSTALL_SUBDIR "host/functional-test")
 
 # Each target board can have its own HW arch selection and set of included apps
-SET(MISSION_CPUNAMES cpu1)
-
-# Skip cpu2 on the pc686_rtems5 configuration, as it becomes a resource drain
-# (the images on this configuration are much larger)
-if (NOT SIMULATION STREQUAL "i686-rtems5")
-    list(APPEND MISSION_CPUNAMES cpu2)
-endif ()
+SET(MISSION_CPUNAMES cpu1 cpu2)
 
 # The "cpu1" is a contrived example of a main processor, running
 # all the CFS apps.  RISCV-64 is selected as the platform
